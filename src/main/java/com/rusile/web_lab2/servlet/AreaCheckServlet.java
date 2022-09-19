@@ -24,14 +24,9 @@ public class AreaCheckServlet extends HttpServlet {
     private TableHistory history;
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json; charset=UTF-8");
 
-        String clearHistoryPar = request.getParameter("clearHistory");
-        if (clearHistoryPar != null && clearHistoryPar.equals("true")) {
-            history.getHistory().clear();
-            return;
-        }
 
         if (request.getAttribute("coordinates") == null || request.getAttribute("startTime") ==null) {
             throw new IllegalStateException("Direct call is not available!");
@@ -59,6 +54,9 @@ public class AreaCheckServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-        throw new IllegalStateException("POST request is unavailable. Use GET.");
+        String clearHistoryPar = request.getParameter("clearHistory");
+        if (clearHistoryPar != null && clearHistoryPar.equals("true")) {
+            history.getHistory().clear();
+        }
     }
 }

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
 
 @WebServlet(name = "ControllerServlet", value = "/check-values")
 public class ControllerServlet extends HttpServlet {
@@ -19,18 +20,19 @@ public class ControllerServlet extends HttpServlet {
         String xPar = request.getParameter("x");
         String yPar = request.getParameter("y");
         String rPar = request.getParameter("r");
-        String clearHistoryPar = request.getParameter("clearHistory");
 
-        if (clearHistoryPar != null && clearHistoryPar.equals("true")) {
-            getServletContext().getRequestDispatcher("/check-point").forward(request, response);
-            return;
-        }
 
         if (xPar != null && yPar != null && rPar != null) {
             request.setAttribute("startTime", System.nanoTime());
 
             Validator validator = Validator.getInstance();
-            Coordinates coordinates = validator.validateCoordinates(xPar, yPar, rPar);
+            Coordinates coordinates;
+            try {
+                 coordinates = validator.validateCoordinates(xPar, yPar, rPar);
+            } catch (ValidationException e) {
+                log(Arrays.toString(e.getStackTrace()));
+                throw new ValidationException(e.getMessage());
+            }
 
 
             request.setAttribute("coordinates", coordinates);
@@ -42,6 +44,10 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        throw new IllegalStateException("POST request is unavailable. Use GET.");
+        String clearHistoryPar = request.getParameter("clearHistory");
+
+        if (clearHistoryPar != null && clearHistoryPar.equals("true")) {
+            getServletContext().getRequestDispatcher("/check-point").forward(request, response);
+        }
     }
 }

@@ -15,7 +15,7 @@ function resetInput() {
     document.getElementById('y_error').innerHTML = "";
     document.getElementById('r_error').innerHTML = "";
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "./check-values",
         dataType: "html",
         data: "clearHistory=true",

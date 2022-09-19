@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="web_lab2:war exploded">
+  <artifact type="exploded-war" build-on-make="true" name="web_lab2:war exploded">
     <output-path>$PROJECT_DIR$/target/web_lab2</output-path>
     <properties id="maven-jee-properties">
       <options>
