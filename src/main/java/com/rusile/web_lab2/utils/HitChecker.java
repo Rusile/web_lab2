@@ -2,16 +2,10 @@ package com.rusile.web_lab2.utils;
 
 import com.rusile.web_lab2.table.Coordinates;
 
+import javax.ejb.Stateless;
+
+@Stateless
 public class HitChecker {
-    private static HitChecker instance;
-
-    public static synchronized HitChecker getInstance() {
-        if (instance == null) {
-            instance = new HitChecker();
-        }
-        return instance;
-    }
-
     public boolean isHit(Coordinates coordinates) {
         return checkCircle(coordinates) || checkSquare(coordinates) || checkTriangle(coordinates);
     }

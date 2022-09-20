@@ -23,6 +23,9 @@ public class AreaCheckServlet extends HttpServlet {
     @EJB
     private TableHistory history;
 
+    @EJB
+    private HitChecker hitChecker;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/json; charset=UTF-8");
@@ -35,7 +38,6 @@ public class AreaCheckServlet extends HttpServlet {
 
         Coordinates coordinates = (Coordinates) request.getAttribute("coordinates");
         Result result = new Result(coordinates);
-        HitChecker hitChecker = HitChecker.getInstance();
         boolean isHit = hitChecker.isHit(result.getCoordinates());
 
         result.setHit(isHit);

@@ -55,7 +55,7 @@ $('.graph').click(function(e) {
     let x = Math.round(e.clientX - target.left);
     let y = Math.round(e.clientY - target.top);
     let xVal = Math.round((x - 150) / (100 / rVal));
-    let yVal = (y - 150) / (-100 / rVal).toFixed(3);
+    let yVal = ((y - 150) / (-100 / rVal)).toFixed(3);
     send(xVal, yVal, rVal);
 });
 

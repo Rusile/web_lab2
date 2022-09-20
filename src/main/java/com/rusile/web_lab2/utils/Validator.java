@@ -2,32 +2,35 @@ package com.rusile.web_lab2.utils;
 
 import com.rusile.web_lab2.exception.ValidationException;
 import com.rusile.web_lab2.table.Coordinates;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import java.util.*;
 
-
+@Stateless
+@NoArgsConstructor
 public class Validator {
-    private final Map<String, String> errors = new HashMap<>();
+    @Getter
+    @Setter
+    private  Map<String, String> errors = new HashMap<>();
 
-    private final Set<Float> rVals = new HashSet<>(Arrays.asList(1F, 1.5F, 2F, 2.5F, 3F));
-    private final Set<Integer> xVals = new HashSet<>(Arrays.asList(-3, -2, -1, 0, 1, 2, 3, 4, 5));
-
-    private static Validator instance;
-
-    public static synchronized Validator getInstance() {
-        if (instance == null) {
-            instance = new Validator();
-        }
-        return instance;
-    }
+    @Getter
+    @Setter
+    private  Set<Float> rVals = new HashSet<>(Arrays.asList(1F, 1.5F, 2F, 2.5F, 3F));
+    @Getter
+    @Setter
+    private  Set<Integer> xVals = new HashSet<>(Arrays.asList(-3, -2, -1, 0, 1, 2, 3, 4, 5));
 
     public Coordinates validateCoordinates(@NonNull String strX, @NonNull String strY, @NonNull String strR) {
         int x = checkX(strX);
         double y =checkY(strY);
         float r = checkR(strR);
         if (!errors.isEmpty()) {
-            throw new ValidationException(errors);
+            return null;
         }
         return new Coordinates(x, y, r);
     }
