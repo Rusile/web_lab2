@@ -23,6 +23,18 @@ function send(x, y, r) {
         beforeSend: function () {
             $('submit').disabled = true;
         },
+        error: function (jqXHR, ex) {
+            let text = jqXHR.responseText;
+            let el = document.createElement('html');
+            el.innerHTML = text;
+            let htmlElements = el.getElementsByTagName('h5');
+            var stringWithHtmlTobeSavedInTextArea = "";
+            for (i = 0; i < htmlElements.length; i++) {
+                stringWithHtmlTobeSavedInTextArea += htmlElements[i].outerHTML;
+            }
+            alert(stringWithHtmlTobeSavedInTextArea.replaceAll("<h5>", "")
+                .replaceAll("</h5>", ""));
+        },
         success: function (data) {
             $('submit').disabled = false;
             addData(data);

@@ -10,10 +10,10 @@
 </head>
 <body>
 <h2>Exception occurred while processing the request</h2>
-<h4>Type:</h4> --<%=  exception%>
+<h4>Type:</h4> <h5>--<%=  exception%></h5>
 
 <h4>Message:</h4>
-
+<h5>
 <%
     for (int i = 0; i < messages.length; i++) {
         if (i != 0)
@@ -22,5 +22,6 @@
 
     }
 %>
+</h5>
 </body>
 </html>
