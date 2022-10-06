@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<jsp:useBean id="history" class="com.rusile.web_lab2.table.TableHistoryBean" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +12,15 @@
     <link href="css/table.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
 </head>
-<body>
+<body onload="getTableHistory()">
+
 <header class="author">
     <text>Rusile | P32081 | 3281</text>
 </header>
 
 <main>
 
-<p id="coord"></p>
+    <p id="coord"></p>
     <div class="graph">
         <svg width="300" height="300" id="svg">
 
@@ -113,9 +115,9 @@
                 </div>
             </div>
             <div class="errors">
-            <p style="color: red; font-size: 0.7em" id="x_error"></p>
-            <p style="color: red; font-size: 0.7em" id="y_error"></p>
-            <p style="color: red; font-size: 0.7em" id="r_error"></p>
+                <p style="color: red; font-size: 0.7em" id="x_error"></p>
+                <p style="color: red; font-size: 0.7em" id="y_error"></p>
+                <p style="color: red; font-size: 0.7em" id="r_error"></p>
             </div>
         </form>
     </div>

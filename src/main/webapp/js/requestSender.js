@@ -14,8 +14,8 @@ function send(x, y, r) {
     document.getElementById('y_error').innerHTML = "";
     document.getElementById('r_error').innerHTML = "";
     $.ajax({
-        type: "GET",
-        url: "./check-values",
+        type: "POST",
+        url: "./controller",
         dataType: "html",
         data: "x=" + x +
             "&y=" + y +
@@ -23,8 +23,9 @@ function send(x, y, r) {
         beforeSend: function () {
             $('submit').disabled = true;
         },
-        error: function (jqXHR, ex) {
-            alert(jqXHR.text);
+        error: function (xhr, status, error) {
+            let errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
         },
         success: function (data) {
             $('submit').disabled = false;

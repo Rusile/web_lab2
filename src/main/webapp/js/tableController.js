@@ -6,7 +6,6 @@ if (storage.getItem('tableData') != null) {
 
 function addData(data) {
     table.innerHTML = parseJSON(data);
-
 }
 
 function resetInput() {
@@ -15,9 +14,8 @@ function resetInput() {
     document.getElementById('y_error').innerHTML = "";
     document.getElementById('r_error').innerHTML = "";
     $.ajax({
-        type: "POST",
-        url: "./check-values",
-        dataType: "html",
+        type: "DELETE",
+        url: "./controller",
         data: "clearHistory=true",
         beforeSend: function () {
             $('reset').disabled = true;
@@ -44,4 +42,23 @@ function parseJSON(data) {
             "</tr>";
     }
     return result;
+}
+
+function getTableHistory() {
+    $.ajax({
+        type: "GET",
+        url: "./controller",
+        dataType: "html",
+        beforeSend: function () {
+            $('submit').disabled = true;
+        },
+        error: function (xhr, status, error) {
+            let errorMessage = xhr.status + ': ' + xhr.statusText
+            alert('Error - ' + errorMessage);
+        },
+        success: function (data) {
+            $('submit').disabled = false;
+            addData(data);
+        },
+    });
 }

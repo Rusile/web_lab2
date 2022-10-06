@@ -5,15 +5,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.ejb.Stateful;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @ToString
-@Stateful
 @NoArgsConstructor
-public class TableHistory {
+public class TableHistoryBean implements Serializable {
     @Getter
     @Setter
-    private List<Result> history = new ArrayList<>();
+    private List<ResultRow> history = new ArrayList<>();
 }

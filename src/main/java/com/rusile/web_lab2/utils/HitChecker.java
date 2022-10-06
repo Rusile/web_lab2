@@ -4,7 +4,7 @@ import com.rusile.web_lab2.table.Coordinates;
 
 import javax.ejb.Stateless;
 
-@Stateless
+
 public class HitChecker {
     public boolean isHit(Coordinates coordinates) {
         return checkCircle(coordinates) || checkSquare(coordinates) || checkTriangle(coordinates);

@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @ToString
 @RequiredArgsConstructor
-public class Result {
+public class ResultRow {
     @Getter
     private final Coordinates coordinates;
     @Getter
