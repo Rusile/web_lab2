@@ -19,13 +19,11 @@ public class Validator {
     @Getter
     private final Set<Integer> xVals = new HashSet<>(Arrays.asList(-3, -2, -1, 0, 1, 2, 3, 4, 5));
 
-    public void validateCoordinates(String strX,String strY, String strR) {
+    public Map<String, String> validateCoordinates(String strX,String strY, String strR) {
         int x = checkX(strX);
         double y =checkY(strY);
         float r = checkR(strR);
-        if (!errors.isEmpty()) {
-            throw new ValidationException(errors);
-        }
+        return errors;
     }
 
     private float checkR(String strR) {
